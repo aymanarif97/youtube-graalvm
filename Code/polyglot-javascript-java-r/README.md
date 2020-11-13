@@ -7,37 +7,15 @@ This repository contains the code for a demo application for [GraalVM](graalvm.o
 
 ## Preparation
 
-1. [Download GraalVM](https://www.graalvm.org/downloads/), unzip the archive, export the GraalVM home directory as the `$GRAALVM_HOME` and add `$GRAALVM_HOME/bin` to the `PATH` environment variable.
-On Linux:
-```
-export GRAALVM_HOME=/home/${current_user}/path/to/graalvm
-export PATH=$GRAALVM_HOME/bin:$PATH
-```
-On macOS:
-```
-export GRAALVM_HOME=/Users/${current_user}/path/to/graalvm/Contents/Home
-export PATH=$GRAALVM_HOME/bin:$PATH
-```
+1. Installing R
 
-2. Download or clone the repository and navigate into the `polyglot-javascript-java-r` directory:
+
+2. `npm install`
+
+3. Running the application
 
 ```
-git clone https://github.com/graalvm/graalvm-demos
-cd graalvm-demos/polyglot-javascript-java-r
-```
-
-3. Build the benchmark. You can manually execute `npm install`, but there's also a `build.sh` script included for your convenience:
-```
-./build.sh
-```
-
-Now you are all set to run the polyglot JavaScript, Java, R application.
-
-## Running the application
-To run the application, you need to execute the `server.js` file. You can run it with the following command (or run the `run.sh` script):
-
-```
-$GRAALVM_HOME/bin/node --jvm --polyglot server.js
+<Path-to-GraalVM>/bin/node --jvm --polyglot server.js
 ```
 
 If you would like to run the benchmark on a different instance of Node, you can run it with whatever `node` you have. However, usually the polyglot capability won't be supported and the app won't run successfully.
@@ -48,6 +26,38 @@ Open [localhost:3000](localhost:3000) and enjoy the output of the polyglot app. 
 
 GraalVM supports debugging polyglot applications too, add the `--inspect` parameter to the command line, open the url the application prints at the startup in Chrome browser and you can debug, set breakpoints, evaluate expressions in this app in the JavaScript and R code alike.
 
-## A Note About the Application
 
-This is a sample application that for brevity contains reasonably large snippets of code inside the strings. This is not the best approach for structuring polyglot apps, but the easiest to show in a single file.
+# Error
+
+
+```
+
+--polyglot server.js
+Example app listening on port 3000!
+FastR unexpected failure: error loading libR from: /home/ayman/.sdkman/candidates/java/20.1.0.r11-grl/languages/R/lib/libR.so.
+Message: libgfortran.so.3: cannot open shared object file: No such file or directory
+
+Troubleshooting: 
+
+  * Please run /home/ayman/.sdkman/candidates/java/20.1.0.r11-grl/languages/R/bin/configure_fastr. It will check that your system has the necessary dependencies and if not it will suggest how to install them.
+
+  * If this does not help, please open an issue on https://github.com/oracle/fastr/ or reach us on https://graalvm.slack.com.
+
+
+/home/ayman/Desktop/graalvm/youtube-graalvm/Code/polyglot-javascript-java-r/server.js:19
+  text += Polyglot.eval('R',
+                   ^
+
+Error
+    at Object.eval (native)
+    at /home/ayman/Desktop/graalvm/youtube-graalvm/Code/polyglot-javascript-java-r/server.js:19:20
+    at Layer.handle (/home/ayman/Desktop/graalvm/youtube-graalvm/Code/polyglot-javascript-java-r/node_modules/express/lib/router/layer.js:95:5)
+    at next (/home/ayman/Desktop/graalvm/youtube-graalvm/Code/polyglot-javascript-java-r/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/home/ayman/Desktop/graalvm/youtube-graalvm/Code/polyglot-javascript-java-r/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle (/home/ayman/Desktop/graalvm/youtube-graalvm/Code/polyglot-javascript-java-r/node_modules/express/lib/router/layer.js:95:5)
+    at /home/ayman/Desktop/graalvm/youtube-graalvm/Code/polyglot-javascript-java-r/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/home/ayman/Desktop/graalvm/youtube-graalvm/Code/polyglot-javascript-java-r/node_modules/express/lib/router/index.js:335:12)
+    at next (/home/ayman/Desktop/graalvm/youtube-graalvm/Code/polyglot-javascript-java-r/node_modules/express/lib/router/index.js:275:10)
+    at expressInit (/home/ayman/Desktop/graalvm/youtube-graalvm/Code/polyglot-javascript-java-r/node_modules/express/lib/middleware/init.js:40:5)
+
+```

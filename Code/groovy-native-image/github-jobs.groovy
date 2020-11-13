@@ -12,6 +12,6 @@ json.each {
     println ("Location" + it.location)
     println "Company ${it.company}"
     println ("Created at" + it.created_at)
-    println ("URL" + it.url)
+    println ("URL: " + it.url)
     println ("=" * 42)
 }
